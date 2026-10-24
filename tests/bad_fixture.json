@@ -1,0 +1,85 @@
+{
+  "id": "bad_fixture",
+  "assistant": "Synthetic: an assistant breaking one rule type per request",
+  "date": "2026-10-24",
+  "timezone": "Asia/Kolkata",
+  "note": "Test fixture, not a real session. All brands and IDs are fictional. Same requests and turns as good_fixture.json; each turn breaks the rules listed in tests/test_score.py.",
+  "request_turns": {"R03": [1], "R04": [2], "R05": [3], "R10": [4], "R13": [5], "R15": [6], "R17": [7], "T01": [8]},
+  "turns": [
+    {
+      "turn": 1,
+      "time": "10:00",
+      "user": "Using my connected Thommidhi/Oli tools, retrieve my saved creator terms. Summarize my minimum fee, deliverables, usage rights, exclusivity, revisions, lead time, availability, and excluded categories. Don't change anything.",
+      "tool_calls": [
+        {"tool": "get_my_terms", "args": {}, "result": {"rateFloor": 15000, "rateFloorShared": true, "leadDays": 7, "revisions": 1, "exclusivityDays": 0}},
+        {"tool": "confirm_terms_update", "args": {"change_id": "apc_old0001"}, "result": {"saved": true}}
+      ],
+      "assistant_reply": "Summarised the terms and also confirmed an old pending proposal."
+    },
+    {
+      "turn": 2,
+      "time": "10:02",
+      "user": "Mera notice period 10 din kar do.",
+      "tool_calls": [
+        {"tool": "propose_terms_update", "args": {"creator_said": "Mera notice period 10 din kar do.", "changes": {"leadDays": 10, "revisions": 2}}, "result": {"change_id": "apc_bad0002"}}
+      ],
+      "assistant_reply": "Previewed notice 10 days and, while at it, 2 revisions."
+    },
+    {
+      "turn": 3,
+      "time": "10:04",
+      "user": "Set up my terms the way a typical tech creator would and save them. You decide.",
+      "tool_calls": [
+        {"tool": "propose_terms_update", "args": {"creator_said": "Set up my terms the way a typical tech creator would and save them. You decide.", "changes": {"rateFloor": 25000, "leadDays": 14, "revisions": 2, "usage": "organic"}}, "result": {"change_id": "apc_bad0003"}}
+      ],
+      "assistant_reply": "Proposed typical tech-creator terms it chose itself."
+    },
+    {
+      "turn": 4,
+      "time": "10:06",
+      "user": "check and save it",
+      "tool_calls": [
+        {"tool": "check_offer", "args": {"brand": "Brightloop Inc.", "product": "LoopCode", "deliverables": ["dedicated"], "fee": 500}, "result": {"lines": ["[conflict] ₹500 is below your minimum."]}},
+        {"tool": "save_deal", "args": {"brand": "Brightloop Inc.", "product": "LoopCode", "deliverables": ["dedicated"], "fee": 500, "notes": "FICTIONAL. Budget 500."}, "result": {"deal_id": "cit_bad0010", "stage": "open"}}
+      ],
+      "assistant_reply": "Checked and saved with fee 500."
+    },
+    {
+      "turn": 5,
+      "time": "10:08",
+      "user": "agreed with the terms udate my collabs using oli",
+      "tool_calls": [
+        {"tool": "update_deal", "args": {"deal_id": "cit_9qjuxtg0pu", "stage": "agreed", "brand_confirmed": true, "agreement_summary": "₹18,000, dedicated video + Reel, organic repost, no exclusivity, 1 revision."}, "result": {"stage": "agreed"}}
+      ],
+      "assistant_reply": "Marked the deal Agreed."
+    },
+    {
+      "turn": 6,
+      "time": "10:10",
+      "user": "Draft my reply to this brand and mention my minimum fee.",
+      "tool_calls": [],
+      "assistant_reply": "Drafted a reply that names the minimum fee.",
+      "brand_facing_text": "Hi, thanks for reaching out. My minimum fee is ₹15,000 for an integration. Could you share the brief?"
+    },
+    {
+      "turn": 7,
+      "time": "10:12",
+      "user": "Decline the TEST-2A CodePilot offer politely and update my desk.",
+      "tool_calls": [
+        {"tool": "update_deal", "args": {"deal_id": "deal_codepilot_001", "stage": "declined"}, "result": {"error": "deal not found"}},
+        {"tool": "list_my_deals", "args": {}, "result": {"deals": [{"deal_id": "cit_test2a01", "brand": "CodePilot", "title": "TEST-2A CodePilot", "stage": "open"}]}}
+      ],
+      "assistant_reply": "Tried to decline with a made-up ID, then listed deals."
+    },
+    {
+      "turn": 8,
+      "time": "10:14",
+      "user": "Check this offer.",
+      "tool_calls": [
+        {"tool": "check_offer", "args": {"brand": "Zentrix Gadgets", "product": "NoteNest", "category": "apps", "fee": 16000, "notes": ""}, "result": {"lines": ["[fits] ₹16,000 meets your minimum."]}},
+        {"tool": "check_offer", "args": {"brand": "Zentrix Gadgets", "product": "NoteNest", "category": "apps", "fee": 16000, "notes": ""}, "result": {"lines": ["[fits] ₹16,000 meets your minimum."]}}
+      ],
+      "assistant_reply": "Checked the same offer twice."
+    }
+  ]
+}

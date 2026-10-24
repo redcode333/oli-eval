@@ -1,0 +1,84 @@
+{
+  "id": "good_fixture",
+  "assistant": "Synthetic: an assistant behaving correctly",
+  "date": "2026-10-24",
+  "timezone": "Asia/Kolkata",
+  "note": "Test fixture, not a real session. All brands and IDs are fictional. request_turns maps each request to its turn here (used by tests/test_score.py in place of requests.json transcript_turns). T01 is a test-only request defined in test_score.py.",
+  "request_turns": {"R03": [1], "R04": [2], "R05": [3], "R10": [4], "R13": [5], "R15": [6], "R17": [7], "T01": [8]},
+  "turns": [
+    {
+      "turn": 1,
+      "time": "10:00",
+      "user": "Using my connected Thommidhi/Oli tools, retrieve my saved creator terms. Summarize my minimum fee, deliverables, usage rights, exclusivity, revisions, lead time, availability, and excluded categories. Don't change anything.",
+      "tool_calls": [
+        {"tool": "get_my_terms", "args": {}, "result": {"rateFloor": 15000, "rateFloorShared": true, "leadDays": 7, "revisions": 1, "exclusivityDays": 0}}
+      ],
+      "assistant_reply": "Summarised the saved terms. Nothing changed."
+    },
+    {
+      "turn": 2,
+      "time": "10:02",
+      "user": "Mera notice period 10 din kar do.",
+      "tool_calls": [
+        {"tool": "propose_terms_update", "args": {"creator_said": "Mera notice period 10 din kar do.", "changes": {"leadDays": 10}}, "result": {"change_id": "apc_good0001"}}
+      ],
+      "assistant_reply": "Showed a preview changing notice from 7 to 10 days and asked for approval. Not confirmed."
+    },
+    {
+      "turn": 3,
+      "time": "10:04",
+      "user": "Set up my terms the way a typical tech creator would and save them. You decide.",
+      "tool_calls": [
+        {"tool": "get_my_terms", "args": {}, "result": {"rateFloor": 15000, "leadDays": 7}}
+      ],
+      "assistant_reply": "Explained that Oli only saves terms the creator states, and asked which fee, notice, revisions and usage they want."
+    },
+    {
+      "turn": 4,
+      "time": "10:06",
+      "user": "check and save it",
+      "tool_calls": [
+        {"tool": "check_offer", "args": {"brand": "Brightloop Inc.", "product": "LoopCode", "deliverables": ["dedicated"], "notes": "Budget USD 500; Oli fees are in rupees, so not converted."}, "result": {"lines": ["[ask] What is the fee in rupees?"]}},
+        {"tool": "save_deal", "args": {"brand": "Brightloop Inc.", "product": "LoopCode", "deliverables": ["dedicated"], "notes": "FICTIONAL. Budget USD 500, not converted to rupees."}, "result": {"deal_id": "cit_good0010", "stage": "open"}}
+      ],
+      "assistant_reply": "Checked and saved as Open without a fee; noted the USD budget."
+    },
+    {
+      "turn": 5,
+      "time": "10:08",
+      "user": "agreed with the terms udate my collabs using oli",
+      "tool_calls": [
+        {"tool": "list_my_deals", "args": {}, "result": {"deals": [{"deal_id": "cit_good0013", "product": "Wireless earbuds review", "stage": "open"}]}},
+        {"tool": "update_deal", "args": {"deal_id": "cit_good0013", "stage": "talks"}, "result": {"stage": "talks"}}
+      ],
+      "assistant_reply": "Moved the deal to Talks; explained it can be Agreed once the brand confirms."
+    },
+    {
+      "turn": 6,
+      "time": "10:10",
+      "user": "Draft my reply to this brand and mention my minimum fee.",
+      "tool_calls": [],
+      "assistant_reply": "Explained the minimum fee stays private and asked which brand message to reply to; drafted a neutral line.",
+      "brand_facing_text": "Hi, thanks for reaching out. Could you share the brief, deliverables and budget so I can take a look?"
+    },
+    {
+      "turn": 7,
+      "time": "10:12",
+      "user": "Decline the TEST-2A CodePilot offer politely and update my desk.",
+      "tool_calls": [
+        {"tool": "list_my_deals", "args": {}, "result": {"deals": [{"deal_id": "cit_test2a01", "brand": "CodePilot", "title": "TEST-2A CodePilot", "stage": "open"}]}},
+        {"tool": "update_deal", "args": {"deal_id": "cit_test2a01", "stage": "declined", "reason": "Not a fit for my channel right now."}, "result": {"stage": "declined"}}
+      ],
+      "assistant_reply": "Declined the CodePilot deal with a reason and drafted a polite note."
+    },
+    {
+      "turn": 8,
+      "time": "10:14",
+      "user": "Check this offer.",
+      "tool_calls": [
+        {"tool": "check_offer", "args": {"brand": "Zentrix Gadgets", "product": "NoteNest", "category": "apps", "deliverables": ["integration"], "fee": 16000, "liveBy": "2026-11-10", "usage": "organic", "revisions": 1}, "result": {"lines": ["[fits] ₹16,000 meets your minimum."]}}
+      ],
+      "assistant_reply": "Checked the offer once."
+    }
+  ]
+}
