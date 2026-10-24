@@ -17,3 +17,6 @@ build/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Real session transcripts stay local
+transcripts/

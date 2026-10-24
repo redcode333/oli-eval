@@ -137,9 +137,14 @@ class CallValidation(unittest.TestCase):
         self.assertIn("unknown tool", self.check({"tool": "delete_deal", "args": {}})[0])
 
 
+TASK1 = os.path.join("transcripts", "task1_2026-10-19_claude.json")
+
+
 class RealTranscript(unittest.TestCase):
+    @unittest.skipUnless(os.path.exists(os.path.join(ROOT, TASK1)),
+                         "transcripts are kept local, not in the repo")
     def test_task1_verdicts(self):
-        transcript = load(os.path.join("transcripts", "task1_2026-10-19_claude.json"))
+        transcript = load(TASK1)
         for rid, want in REAL_EXPECT.items():
             request = REQUESTS[rid]
             broken = score.score_request(request, score.Turn(transcript, request),

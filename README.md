@@ -22,7 +22,7 @@ assistant handled them:
 ```
 oli_tools.json        the 10 Oli tools, their write level, inputs and allowed values
 requests.json         20 creator requests with the expected behaviour for each
-transcripts/          real sessions to score (currently one: Claude + Oli, 19 Oct 2026)
+transcripts/          real sessions to score (kept local, not published)
 score.py              the scorer
 check_requests.py     sanity check for requests.json against oli_tools.json
 results/              reports written by the scorer
@@ -42,6 +42,9 @@ python check_requests.py
 
 The scorer prints the report and writes the same text to `results/task1_report.md`.
 It exits 0 unless the arguments are wrong.
+
+Real transcripts are not in this repo. Put them in `transcripts/` locally; without
+them, the regression test is skipped and the other tests still run.
 
 A request is FAIL if any fail-level rule breaks, WARN if only warn-level rules break,
 and PASS otherwise. Requests with no matching turn in the transcript are NOT RUN.
